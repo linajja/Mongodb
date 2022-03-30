@@ -18,10 +18,10 @@ app.use(express.urlencoded({
 
 
 app.post('/save-data', (req, res) => {
-    mongoose.connect('mongodb://localhost/facebook', (err) => {
-        if (!err)
-            res.send("Prisijungimas prie duomenų bazės pavyko")
-    });
+    // mongoose.connect('mongodb://localhost/facebook', (err) => {
+    //     if (!err)
+    //         res.send("Prisijungimas prie duomenų bazės pavyko")
+    // });
 
     const posts = mongoose.model('posts', postsSchema)
     const newPost = new posts()
