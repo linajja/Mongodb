@@ -1,8 +1,9 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import { writeFile, readFile } from 'fs'
+import cors from 'cors'
 
 const app = express()
+app.use(cors())
 
 app.use(express.json())
 
@@ -27,6 +28,23 @@ const posts = mongoose.model('posts', postsSchema)
 // newPost.data = '2022-03-30'
 // newPost.save()
 
+app.get('/show-data', (req, res) => {
+    posts.find((err, data) => {
+        if (err)
+            return console.log(err)
+        res.json(data)
+    })
+})
+
+app.delete('/delete-data/:id', (req, res) => {
+    posts.findByIdAndDelete(req.body._id).exec()
+    posts.find((err, data) => {
+        if (err)
+            return console.log(err)
+
+        res.send(data)
+    })
+})
 
 app.post('/save-data', (req, res) => {
     const newPost = new posts()
