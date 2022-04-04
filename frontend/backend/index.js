@@ -11,25 +11,27 @@ app.use(express.urlencoded({
     extended: false
 }))
 
-const database = 'mongodb://localhost/facebook'
+const database = 'mongodb://localhost/OrderManagement'
 
-mongoose.connect('mongodb://localhost/facebook', (err) => {
+mongoose.connect('mongodb://localhost/OrderManagement', (err) => {
     if (!err)
         console.log("Prisijungimas prie duomenų bazės pavyko")
 });
-const postsSchema = new mongoose.Schema({
-    content: String,
-    data: Date
+const productsSchema = new mongoose.Schema({
+    product_name: String,
+    description: String,
+    price: String,
+    discount_price: String
 })
 
-const posts = mongoose.model('posts', postsSchema)
+const products = mongoose.model('Products', productsSchema, 'Products')
 
 // newPost.content = "Test"
 // newPost.data = '2022-03-30'
 // newPost.save()
 
 app.get('/show-data', (req, res) => {
-    posts.find((err, data) => {
+    products.find((err, data) => {
         if (err)
             return console.log(err)
         res.json(data)
@@ -38,8 +40,8 @@ app.get('/show-data', (req, res) => {
 
 app.delete('/delete-data/:id', (req, res) => {
     let id = req.params.id
-    posts.findByIdAndDelete(id).exec()
-    posts.find((err, data) => {
+    products.findByIdAndDelete(id).exec()
+    products.find((err, data) => {
         if (err)
             return console.log(err)
         res.json(data)
@@ -47,18 +49,22 @@ app.delete('/delete-data/:id', (req, res) => {
 })
 
 app.post('/save-data', (req, res) => {
-    const newPost = new posts()
+    const newPost = new products()
     if (
-        req.body.content === "" ||
-        req.body.data === ""
+        req.body.product_name === "" ||
+        req.body.description === "" ||
+        req.body.price === "" ||
+        req.body.discount_price === ""
     ) {
         res.send('Užpildykite duomenis')
 
     } else {
-        newPost.content = req.body.content
-        newPost.data = req.body.data
+        newPost.product_name = req.body.product_name
+        newPost.description = req.body.description
+        newPost.price = req.body.price
+        newPost.discount_price = req.body.discount_price
         newPost.save()
-        res.send({ message: "Failas įrašytas", content: req.body.content, data: req.body.data })
+        res.send({ message: "Failas įrašytas", product_name: req.body.product_name, description: req.body.description, price: req.body.price, discount_price: req.body.discount_price })
 
     }
 })
@@ -73,9 +79,9 @@ app.post('/save-data', (req, res) => {
 
 app.put('/edit-data/:id', (req, res) => {
     let id = req.params.id
-    let content = req.body.content
-    posts.findByIdAndUpdate(id, {
-        content: content,
+    let product_name = req.body.product_name
+    products.findByIdAndUpdate(id, {
+        product_name: product_name,
     })
         .then(data => {
             res.send("Info changed")

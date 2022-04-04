@@ -1,13 +1,13 @@
 @import './font-awesome.min.css';
 
 body {
-    background: url(https://images.unsplash.com/photo-1602498456745-e9503b30470b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80);
+    background: url(https://cdn.shopify.com/s/files/1/0285/1316/products/w0284_1s_Black-and-White-Floral-Pattern-Wallpaper-for-Walls-Sketch-Floral_Repeating-Pattern-Sample-1.jpg?v=1604089102);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.mongodb-container {
-    background: rgb(255, 255, 253);
+.products-container {
+    background: rgb(220, 224, 221);
     max-width: 600px;
     margin-top: 4rem;
     padding: 2rem;
@@ -40,6 +40,8 @@ body {
 }
 
 #content ul>li {
+    display: flex;
+    flex-direction: column;
     padding: 20px 0;
     border-bottom: 1px solid grey;
 }
@@ -55,9 +57,6 @@ body {
 .btn {
     display: block;
     float: right;
-    margin: 0;
-    padding: 0 3px;
-}
-.btn-primary {
-    margin-right: 5px;
+    margin: 3px;
+    padding: 3px 3px;
 }
