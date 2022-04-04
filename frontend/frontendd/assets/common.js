@@ -117,4 +117,6 @@ window.addEventListener('load', () => {
     newOrderForm()
 })
 
-
+window.addEventListener('load', () => {
+    newOrderForm()
+})
