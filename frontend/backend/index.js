@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { json } from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 
@@ -37,12 +37,12 @@ app.get('/show-data', (req, res) => {
 })
 
 app.delete('/delete-data/:id', (req, res) => {
-    posts.findByIdAndDelete(req.body._id).exec()
+    let id = req.params.id
+    posts.findByIdAndDelete(id).exec()
     posts.find((err, data) => {
         if (err)
             return console.log(err)
-
-        res.send(data)
+        res.json(data)
     })
 })
 
@@ -62,6 +62,30 @@ app.post('/save-data', (req, res) => {
 
     }
 })
+
+// let post = posts.findByIdAndUpdate('6245d03761d2b4a7df2b73f2', {
+//     content: "Programiskai redaguotas irasas"
+// })
+//     .then(data => {
+//         console.log('Irasas sekmingai atnaujintas')
+//     })
+
+
+app.put('/edit-data/:id', (req, res) => {
+    let id = req.params.id
+    let content = req.body.content
+    posts.findByIdAndUpdate(id, {
+        content: content,
+    })
+        .then(data => {
+            res.send("Info changed")
+        })
+
+})
+
+
+
+
 
 app.listen(5001, () => {
     console.log('Serveris veikia')

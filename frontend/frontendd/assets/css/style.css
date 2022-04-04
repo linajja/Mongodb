@@ -1,0 +1,63 @@
+@import './font-awesome.min.css';
+
+body {
+    background: url(https://images.unsplash.com/photo-1602498456745-e9503b30470b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mongodb-container {
+    background: rgb(255, 255, 253);
+    max-width: 600px;
+    margin-top: 4rem;
+    padding: 2rem;
+}
+
+.list-heading {
+    text-align: center;
+}
+
+.messages {
+    display: none;
+}
+
+.messages.show {
+    display: block;
+}
+
+.mark-done {
+    text-decoration: none;
+}
+
+.mark-done.done {
+    text-decoration: line-through;
+}
+
+#content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#content ul>li {
+    padding: 20px 0;
+    border-bottom: 1px solid grey;
+}
+
+.actions {
+    padding-top: 15px;
+}
+
+.edit-mode {
+    background: rgb(255, 245, 187);
+}
+
+.btn {
+    display: block;
+    float: right;
+    margin: 0;
+    padding: 0 3px;
+}
+.btn-primary {
+    margin-right: 5px;
+}
