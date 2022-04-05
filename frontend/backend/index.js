@@ -2,6 +2,9 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import products from './controllers/products.js'
+import orders from './controllers/orders.js'
+
 
 const app = express()
 
@@ -13,24 +16,22 @@ app.use(express.urlencoded({
     extended: false
 }))
 
-mongoose.connect('mongodb://localhost/OrderManagement', (err) => {
-    if (!err)
-        console.log('Prisijungimas prie duomenu bazes pavyko')
-});
+app.use('/products', products)
+app.use('/orders', orders)
 
-const productsSchema = new mongoose.Schema({
-    product_name: String,
-    description: String,
-    price: Number,
-    discount_price: Number
-})
+const init = async () => {
 
-const Products = mongoose.model('Products', productsSchema, 'Products')
 
-app.get('/show-products', async (req, res) => {
-    const data = await Products.find()
+    try {
+        mongoose.connect('mongodb://localhost/OrderManagement', (err) => {
+            if (!err)
+                console.log('Prisijungimas prie duomenu bazes pavyko')
+        });
 
-    res.json(data)
-})
+        app.listen(5001)
+    } catch (err) {
+        console.log(err)
+    }
+}
 
-app.listen(5001)
+init()

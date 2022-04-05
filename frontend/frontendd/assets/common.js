@@ -16,11 +16,28 @@ const transferData = async (url, method = 'GET', data = {}) => {
     return resp.json()
 }
 
+const validators = (fields) => {
+    let valid = true;
+    let entries = Object.entries(fields)
+
+    if (!fields.product)
+        valid = false
+
+    entries.forEach(value => {
+        if (value == "") {
+            value == false
+            return
+        }
+    })
+
+    return valid
+}
+
 const newOrderForm = async () => {
     const root = document.querySelector('#newOrderForm')
     const productsContainer = root.querySelector('.productSelect')
 
-    const products = await transferData(url + '/show-products')
+    const products = await transferData(url + '/products/show-products')
 
     let html = '<ul>'
 
@@ -46,6 +63,20 @@ const newOrderForm = async () => {
     html += '<ul>'
 
     productsContainer.innerHTML = html
+
+    root.querySelector('button.checkout-button').addEventListener('click', () => {
+        const form = root.querySelector()
+        const formData = new FormData(form)
+        const formJson = JSON.stringify(Object.fromEntries(formData))
+
+
+        if (validators(formData)) {
+            transferData(url + '/order/save-order', 'POST', formJson)
+                .then(resp => {
+                    console.log(app)
+                })
+        }
+    })
 }
 
 window.addEventListener('load', () => {
