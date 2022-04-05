@@ -32,12 +32,14 @@ const newOrderForm = async () => {
                     <span class="originalPrice">${product.price}</span>`
 
         html += `<li>
+                  <label>
                     <input type="radio" name="product" value="${product._id}">
                     <div class="contents">
                         <div class="name">${product.product_name}</div>
                         <div class="description">${product.description}</div>
                         <div class="price">${price}</div>
                     </div>
+                    </label>
                 </li>`
     })
 

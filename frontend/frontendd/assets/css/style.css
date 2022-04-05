@@ -6,11 +6,13 @@ body {
     background-size: cover;
 }
 
-.products-container {
+.container {
+    box-shadow: 5px 10px 12px 10px rgb(8, 160, 8);
     background: rgb(220, 224, 221);
     max-width: 600px;
     margin-top: 4rem;
     padding: 2rem;
+    
 }
 
 .list-heading {
@@ -59,4 +61,21 @@ body {
     float: right;
     margin: 3px;
     padding: 3px 3px;
+}
+
+.form-group {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: green;
+}
+
+h1 {
+    font-family:'Courier New', Courier, monospace; 
+    color: white;
+    text-transform: uppercase;
+    font-size: 35px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black,
+    0 0 25px green,
+    0 0 5px darkgreen;
 }
