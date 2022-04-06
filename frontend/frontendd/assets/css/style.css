@@ -25,6 +25,8 @@ body {
 
 .messages.show {
     display: block;
+    font-size: 30px;
+    color: red;
 }
 
 .mark-done {
@@ -59,7 +61,7 @@ body {
 .btn {
     display: block;
     float: right;
-    margin: 3px;
+    margin-top: 25px;
     padding: 3px 3px;
 }
 
