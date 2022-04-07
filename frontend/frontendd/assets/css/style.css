@@ -7,9 +7,9 @@ body {
 }
 
 .container {
-    box-shadow: 5px 10px 12px 10px rgb(8, 160, 8);
+    
     background: rgb(220, 224, 221);
-    max-width: 600px;
+    max-width: 1000px;
     margin-top: 4rem;
     margin-bottom: 4rem;
     padding: 2rem;
@@ -91,6 +91,7 @@ h1 {
     font-family:'Courier New', Courier, monospace; 
     color: white;
     text-transform: uppercase;
+    text-align: center;
     font-size: 35px;
     font-weight: bold;
     text-shadow: 1px 1px 2px black,
@@ -119,4 +120,10 @@ h1 {
     font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
+}
+.totals{
+
+    margin-top: 25px;
+    font-size: 20px;
+    color: red;
 }

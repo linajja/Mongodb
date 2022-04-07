@@ -95,17 +95,17 @@ const newOrderForm = async () => {
             let shipMethod = document.getElementById('shiping')
             let transportPrice = changePrice + 3.63
             if (shipMethod.value === "delivery") {
-                root.querySelector('.totals').textContent = (transportPrice).toFixed(2) + " EUR"
+                root.querySelector('.totals').textContent = "Mokėti: " + (transportPrice).toFixed(2) + " EUR"
             } if (shipMethod.value === "pickup") {
-                root.querySelector('.totals').textContent = changePrice.toFixed(2) + " EUR"
+                root.querySelector('.totals').textContent = "Mokėti: " + changePrice.toFixed(2) + " EUR"
             }
             if (
                 root.querySelector('#shiping').addEventListener('change', () => {
 
                     if (shipMethod.value === "delivery") {
-                        root.querySelector('.totals').textContent = (transportPrice).toFixed(2) + " EUR"
+                        root.querySelector('.totals').textContent = "Mokėti: " + (transportPrice).toFixed(2) + " EUR"
                     } if (shipMethod.value === "pickup") {
-                        root.querySelector('.totals').textContent = changePrice.toFixed(2) + " EUR"
+                        root.querySelector('.totals').textContent = "Mokėti: " + changePrice.toFixed(2) + " EUR"
                     }
                 })
             )
