@@ -7,10 +7,10 @@ Router.post('/save-order', async (req, res) => {
     const newOrder = new Orders(req.body)
     newOrder.save()
         .then(result => {
-            res.send({ message: "Užsakymas sėkmingai priimtas" })
+            res.send({ message: "Užsakymas sėkmingai priimtas!" })
         })
         .catch(err => {
-            res.send("Įvyko techninė klaida")
+            res.send({ message: "Įvyko techninė klaida" })
         })
 })
 

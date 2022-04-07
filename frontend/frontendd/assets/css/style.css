@@ -11,6 +11,7 @@ body {
     background: rgb(220, 224, 221);
     max-width: 600px;
     margin-top: 4rem;
+    margin-bottom: 4rem;
     padding: 2rem;
     
 }
@@ -25,8 +26,22 @@ body {
 
 .messages.show {
     display: block;
-    font-size: 30px;
-    color: red;
+    width: 70%;
+    margin-top: 25px;
+    background-color: rgb(8, 160, 8);
+    font-size: 20px;
+    text-align: center;
+    color: black;
+}
+
+.messages.show-alert {
+    display: block;
+    width: 70%;
+    margin-top: 25px;
+    background-color: red;
+    font-size: 20px;
+    text-align: center;
+    color: black;
 }
 
 .mark-done {
@@ -62,6 +77,7 @@ body {
     display: block;
     float: right;
     margin-top: 25px;
+    margin-bottom: 25px;
     padding: 3px 3px;
 }
 
@@ -80,4 +96,27 @@ h1 {
     text-shadow: 1px 1px 2px black,
     0 0 25px green,
     0 0 5px darkgreen;
+}
+.orderForm{
+    margin-bottom: 50px;
+}
+.specialPrice{
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    font-style: italic;
+}
+
+.originalPrice {
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+.name{
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
 }

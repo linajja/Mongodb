@@ -1,18 +1,4 @@
 const url = 'http://localhost:5001'
-const messageDiv = document.querySelector('.messages')
-
-const messages = (message, status) => {
-    let klase = (status === 'success') ? 'alert-success' : 'alert-danger'
-    messageDiv.innerHTML = message
-    messageDiv.classList.remove('alert-success', 'alert-danger')
-    messageDiv.classList.add('show', klase)
-
-    setTimeout(() => {
-        messageDiv.classList.remove('show')
-
-    }, 10000)
-}
-
 
 const transferData = async (url, method = 'GET', data = {}) => {
     let options = {
@@ -41,7 +27,10 @@ const validator = (fields) => {
     entries.forEach(value => {
         if (value[1] == '') {
             valid = false
-            return
+            let messages = document.querySelector('.messages')
+
+            messages.innerHTML = "Neužpildyti duomenys"
+            messages.classList.add('show-alert')
         }
     })
 
@@ -90,7 +79,8 @@ const newOrderForm = async () => {
             transferData(url + '/orders/save-order', 'POST', formJson)
                 .then(resp => {
                     let messages = document.querySelector('.messages')
-
+                    const messageDiv = document.querySelector('.messages')
+                    messageDiv.classList.remove('show-alert')
                     messages.innerHTML = resp.message
                     messages.classList.add('show')
 
@@ -109,20 +99,18 @@ const newOrderForm = async () => {
             } if (shipMethod.value === "pickup") {
                 root.querySelector('.totals').textContent = changePrice.toFixed(2) + " EUR"
             }
-        })
-    })
+            if (
+                root.querySelector('#shiping').addEventListener('change', () => {
 
-    root.querySelector('#shiping').addEventListener('change', () => {
-        querySelectorAll('input[name="product"]').addEventListener('click', () => {
-            let price = product.getAttribute('data-price')
-            let changePrice = parseFloat(price)
-            let shipMethod = document.getElementById('shiping')
-            let transportPrice = changePrice + 3.63
-            if (shipMethod.value === "delivery") {
-                root.querySelector('.totals').textContent = (transportPrice).toFixed(2) + " EUR"
-            } if (shipMethod.value === "pickup") {
-                root.querySelector('.totals').textContent = changePrice.toFixed(2) + " EUR"
-            }
+                    if (shipMethod.value === "delivery") {
+                        root.querySelector('.totals').textContent = (transportPrice).toFixed(2) + " EUR"
+                    } if (shipMethod.value === "pickup") {
+                        root.querySelector('.totals').textContent = changePrice.toFixed(2) + " EUR"
+                    }
+                })
+            )
+                return
+
         })
     })
 
