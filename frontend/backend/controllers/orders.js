@@ -14,4 +14,10 @@ Router.post('/save-order', async (req, res) => {
         })
 })
 
+Router.get('/order-info', async (req, res) => {
+    const data = await Orders.find()
+
+    res.json(data)
+})
+
 export default Router

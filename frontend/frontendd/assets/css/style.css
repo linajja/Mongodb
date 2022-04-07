@@ -127,3 +127,21 @@ h1 {
     font-size: 20px;
     color: red;
 }
+.btn btn-primary {
+    display: block;
+    float: right;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 3px 3px;
+}
+#newOrderForm {
+    display: none;
+}
+
+#newOrderForm.show {
+    display: block;
+}
+
+.actions {
+    padding-top: 2rem;
+}

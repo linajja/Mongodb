@@ -37,6 +37,7 @@ const validator = (fields) => {
     return valid
 }
 
+
 const newOrderForm = async () => {
     const root = document.querySelector('#newOrderForm')
     const productsContainer = root.querySelector('.productSelect')
@@ -84,9 +85,45 @@ const newOrderForm = async () => {
                     messages.innerHTML = resp.message
                     messages.classList.add('show')
 
+                    const orderList = async () => {
+                        const root = document.querySelector('#orderList')
+                        const orderContainer = root.querySelector('.orderInformation')
+
+                        const orderInfo = await transferData(url + '/orders/order-info')
+
+                        let html = '<ul>'
+
+                        orderInfo.forEach(info => {
+
+                            html += `<li>
+                    <label>
+                        <input type="radio" name="order" value="${info._id}">
+                        <div class="contents">
+                            <div class="first-name">${info.first_name}</div>
+                            <div class="last-name">${info.last_name}</div>
+                            <div class="address">${info.address}</div>
+                            <div class="city">${info.city}</div>
+                            <div class="post_code">${info.post_code}</div>
+                            <div class="email">${info.email}</div>
+                            <div class="phone">${info.phone}</div>
+                            <div class="shiping">${info.shipping_method}</div>
+                            <div class="payment">${info.payment_method}</div>
+                            <div class="total">${info.totals}</div>
+                        </div>
+                    </label>
+                </li>`
+                        })
+
+                        html += '<ul>'
+
+                        orderContainer.innerHTML = html
+                        orderList()
+                    }
+
                 })
         }
     })
+
     root.querySelectorAll('input[name="product"]').forEach(product => {
 
         product.addEventListener('click', () => {
@@ -116,6 +153,19 @@ const newOrderForm = async () => {
 
 }
 
-window.addEventListener('load', () => {
+
+
+
+document.querySelector('.add-new-order').addEventListener('click', (event) => {
+    const element = event.target
+    const activeLabel = element.getAttribute('data-active-label')
+    const hiddenLabel = element.getAttribute('data-hiden-label')
+
+    const root = document.querySelector('#newOrderForm')
+
+    element.textContent = root.classList.contains('show') ? hiddenLabel : activeLabel
+
+    root.classList.toggle('show')
+
     newOrderForm()
 })
