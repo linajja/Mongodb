@@ -7,7 +7,6 @@ body {
 }
 
 .container {
-    
     background: rgb(220, 224, 221);
     max-width: 1000px;
     margin-top: 4rem;
@@ -144,4 +143,22 @@ h1 {
 
 .actions {
     padding-top: 2rem;
+}
+.add-new-order{
+  margin-top: 0px;
+}
+
+.client{
+    font-weight: bold;
+    
+}
+.product {
+    font-weight: bold;
+    color: green;
+}
+.orders-info{
+    margin-bottom: 20px;
+    color: green;
+    text-transform: uppercase;
+    font-size: 20px;
 }

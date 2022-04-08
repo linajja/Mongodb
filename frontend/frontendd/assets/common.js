@@ -28,7 +28,6 @@ const validator = (fields) => {
         if (value[1] == '') {
             valid = false
             let messages = document.querySelector('.messages')
-
             messages.innerHTML = "Neužpildyti duomenys"
             messages.classList.add('show-alert')
         }
@@ -36,6 +35,35 @@ const validator = (fields) => {
 
     return valid
 }
+
+const orderList = async () => {
+    const orderContainer = document.querySelector('.orderList')
+
+    const orderInfo = await transferData(url + '/orders/order-info')
+
+    let html = '<ul>'
+
+    orderInfo.forEach(info => {
+
+        html += `<li>
+                    <label>
+                        <div> 
+                            <div class="client">Pirkėjas: ${info.first_name} ${info.last_name}</div>
+                            <div class="address">Pristatymo adresas: ${info.address} ${info.city} ${info.post_code}</div>
+                            <div class="contacts">Kontaktai: ${info.email}${info.phone}</div>
+                            <div class="shipping_method">Siuntimo būdas:  ${info.shipping_method}</div>
+                            <div class="payment_method">Apmokėjimo būdas: ${info.payment_method}</div>
+                            <div class="product">Prekės ID: ${info._id}</div>
+                        </div>
+                    </label>
+                </li>`
+    })
+
+    html += '<ul>'
+
+    orderContainer.innerHTML = "Užsakymų informacija" + html
+}
+
 
 
 const newOrderForm = async () => {
@@ -79,46 +107,12 @@ const newOrderForm = async () => {
         if (validator(formJson)) {
             transferData(url + '/orders/save-order', 'POST', formJson)
                 .then(resp => {
+                    orderList()
                     let messages = document.querySelector('.messages')
                     const messageDiv = document.querySelector('.messages')
                     messageDiv.classList.remove('show-alert')
                     messages.innerHTML = resp.message
                     messages.classList.add('show')
-
-                    const orderList = async () => {
-                        const root = document.querySelector('#orderList')
-                        const orderContainer = root.querySelector('.orderInformation')
-
-                        const orderInfo = await transferData(url + '/orders/order-info')
-
-                        let html = '<ul>'
-
-                        orderInfo.forEach(info => {
-
-                            html += `<li>
-                    <label>
-                        <input type="radio" name="order" value="${info._id}">
-                        <div class="contents">
-                            <div class="first-name">${info.first_name}</div>
-                            <div class="last-name">${info.last_name}</div>
-                            <div class="address">${info.address}</div>
-                            <div class="city">${info.city}</div>
-                            <div class="post_code">${info.post_code}</div>
-                            <div class="email">${info.email}</div>
-                            <div class="phone">${info.phone}</div>
-                            <div class="shiping">${info.shipping_method}</div>
-                            <div class="payment">${info.payment_method}</div>
-                            <div class="total">${info.totals}</div>
-                        </div>
-                    </label>
-                </li>`
-                        })
-
-                        html += '<ul>'
-
-                        orderContainer.innerHTML = html
-                        orderList()
-                    }
 
                 })
         }
@@ -169,3 +163,4 @@ document.querySelector('.add-new-order').addEventListener('click', (event) => {
 
     newOrderForm()
 })
+

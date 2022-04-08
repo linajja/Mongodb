@@ -10,8 +10,9 @@ const ordersSchema = new mongoose.Schema({
     email: String,
     phone: String,
     shipping_method: String,
-    peyment_method: String,
-    product: String
+    payment_method: String,
+    product: String,
+    total: String
 })
 
 export default mongoose.model('Orders', ordersSchema, 'Orders')
