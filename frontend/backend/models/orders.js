@@ -12,7 +12,7 @@ const ordersSchema = new mongoose.Schema({
     shipping_method: String,
     payment_method: String,
     product: String,
-    total: String
+    total: Number
 })
 
 export default mongoose.model('Orders', ordersSchema, 'Orders')

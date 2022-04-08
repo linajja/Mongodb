@@ -48,12 +48,15 @@ const orderList = async () => {
         html += `<li>
                     <label>
                         <div> 
+                            <button type="button" class="btn btn-danger delete-button">Trinti</button>
                             <div class="client">Pirkėjas: ${info.first_name} ${info.last_name}</div>
-                            <div class="address">Pristatymo adresas: ${info.address} ${info.city} ${info.post_code}</div>
-                            <div class="contacts">Kontaktai: ${info.email}${info.phone}</div>
+                            <div class="address">Pristatymo adresas: ${info.address}, ${info.city}, ${info.post_code}</div>
+                            <div class="contacts">Kontaktai: ${info.email}, ${info.phone}</div>
                             <div class="shipping_method">Siuntimo būdas:  ${info.shipping_method}</div>
                             <div class="payment_method">Apmokėjimo būdas: ${info.payment_method}</div>
-                            <div class="product">Prekės ID: ${info._id}</div>
+                            <div class="id">Prekės ID: ${info._id}</div>
+                            <div class="product">Prekė: ${info.product}</div>
+                             <div class="product">Suma: ${info.total}</div>
                         </div>
                     </label>
                 </li>`
@@ -62,6 +65,20 @@ const orderList = async () => {
     html += '<ul>'
 
     orderContainer.innerHTML = "Užsakymų informacija" + html
+
+    document.getElementsByClassName('.delete-button').forEach(element => {
+        let id = element.getElementsByClassName('.id')
+
+        element.addEventListener('click', () => {
+
+            transferData(url + 'orders/delete-order/' + id, 'DELETE')
+                .then(resp => {
+                    orderList()
+                })
+
+        })
+    })
+
 }
 
 
@@ -126,16 +143,20 @@ const newOrderForm = async () => {
             let shipMethod = document.getElementById('shiping')
             let transportPrice = changePrice + 3.63
             if (shipMethod.value === "delivery") {
+                document.querySelector('input[name="total"]').value = transportPrice.toFixed(2)
                 root.querySelector('.totals').textContent = "Mokėti: " + (transportPrice).toFixed(2) + " EUR"
             } if (shipMethod.value === "pickup") {
+                document.querySelector('input[name="total"]').value = changePrice.toFixed(2)
                 root.querySelector('.totals').textContent = "Mokėti: " + changePrice.toFixed(2) + " EUR"
             }
             if (
                 root.querySelector('#shiping').addEventListener('change', () => {
 
                     if (shipMethod.value === "delivery") {
+                        document.querySelector('input[name="total"]').value = transportPrice.toFixed(2)
                         root.querySelector('.totals').textContent = "Mokėti: " + (transportPrice).toFixed(2) + " EUR"
                     } if (shipMethod.value === "pickup") {
+                        document.querySelector('input[name="total"]').value = changePrice.toFixed(2)
                         root.querySelector('.totals').textContent = "Mokėti: " + changePrice.toFixed(2) + " EUR"
                     }
                 })
