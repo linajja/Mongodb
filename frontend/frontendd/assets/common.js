@@ -54,9 +54,9 @@ const orderList = async () => {
                             <div class="contacts">Kontaktai: ${info.email}, ${info.phone}</div>
                             <div class="shipping_method">Siuntimo būdas:  ${info.shipping_method}</div>
                             <div class="payment_method">Apmokėjimo būdas: ${info.payment_method}</div>
-                            <div class="id">Prekės ID: ${info._id}</div>
+                            <div class="id" id="id" data-id="${info._id}">Prekės ID: ${info._id}</div>
                             <div class="product">Prekė: ${info.product}</div>
-                             <div class="product">Suma: ${info.total}</div>
+                            <div class="product">Suma: ${info.total}</div>
                         </div>
                     </label>
                 </li>`
@@ -66,19 +66,25 @@ const orderList = async () => {
 
     orderContainer.innerHTML = "Užsakymų informacija" + html
 
-    document.getElementsByClassName('.delete-button').forEach(element => {
-        let id = element.getElementsByClassName('.id')
+}
+
+const deleteOrder = async () => {
+
+
+    document.querySelectorAll('.delete-button').forEach(element => {
+
+        let id = element.getAttribute('data-id')
 
         element.addEventListener('click', () => {
 
-            transferData(url + 'orders/delete-order/' + id, 'DELETE')
+            transferData(url + '/orders/delete-order/' + id, 'DELETE')
                 .then(resp => {
                     orderList()
+
                 })
 
         })
     })
-
 }
 
 
@@ -167,7 +173,6 @@ const newOrderForm = async () => {
     })
 
 }
-
 
 
 

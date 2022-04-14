@@ -35,7 +35,9 @@ Router.delete('/delete-order/:id', (req, res) => {
     Orders.find((err, data) => {
         if (err)
             return console.log(err)
+
         res.json(data)
+
     })
 })
 
